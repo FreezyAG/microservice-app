@@ -1,2 +1,2 @@
-# boilerplate-graphql-app
-This is a microservice app
+# microservice-app
+This is a basic microservice app
