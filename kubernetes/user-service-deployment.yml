@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: first-app-deployment
+  labels:
+    app: first-app
+    backend: backend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: first-app
+      backend: backend-app
+  template:
+    metadata: 
+      labels:
+        app: first-app
+        backend: backend-app
+    spec:
+      containers:
+        - name: user-service
+          image: fisayoag/userservice:latest
+          ports:
+            - containerPort: 4000
+          env:
+            - name: MONGO_ADDRESS
+              value: localhost
+        - name: mongo
+          image: mongo
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: fisayo
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: secret
+            - name: MONGODB_URI
+              value: mongodb://fisayo:password@mongodb:27017/app
+
